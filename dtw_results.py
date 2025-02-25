@@ -1,6 +1,8 @@
 from dtw import *
 import numpy as np
 import pandas as pd
+import time
+from tqdm import tqdm
 
 
 class DTWResults:
@@ -32,10 +34,14 @@ class DTWResults:
         # Count occurances of each class in the training data
         self.count = self.train_data[0].value_counts().values.tolist()
 
-        print(f" Loaded training data with {self.num_classes} classifications.")
+        print(f"Loaded training data with {self.num_classes} classifications.")
         
         for num, cls in enumerate(self.classifcations):
             print(f"Class {cls} has {self.count[num]} signals")
+
+
+        # Initialize elapsed time
+        self.elapsed_time = 0
 
 
     def compute_distance_matrix(self, test_matrix):
@@ -58,11 +64,18 @@ class DTWResults:
 
         # Initialize distance matrix
         Dist_matrix = np.zeros((m, d))
+        start_time = time.time()
 
-        # Compute DTW distance for each pair of training and test samples
-        for i in range(m):
-            for j in range(d):
-                Dist_matrix[i, j] = dtw(self.train_matrix[:, i], test_matrix[:, j]).distance
+        with tqdm(total=m*d, desc="Computing DTW distances", unit="dist") as pbar:
+            # Compute DTW distance for each pair of training and test samples
+            for i in range(m):
+                for j in range(d):
+                    Dist_matrix[i, j] = dtw(self.train_matrix[:, i], test_matrix[:, j]).distance
+                    pbar.update(1)
+
+        end_time = time.time()
+        self.elapsed_time = round((end_time - start_time) / 60, 2)
+        print(f"Elapsed time for DTW distance computation: {self.elapsed_time:.2f} min")
         return Dist_matrix
     
     def find_accuracy(self, class_index, test_matrix_path):
@@ -107,9 +120,11 @@ class DTWResults:
         matrix_ind = np.argmin(matrix_min, axis=0)
         # Calculate accuracy
         acc = np.sum(matrix_ind == class_index) / d
+        acc = float(acc)
+        acc = round(acc, 4)
         print(f"Accuracy of classification for class {class_index} is {acc:.4f}")
 
-        return matrix_min, matrix_ind, acc
+        return matrix_min, matrix_ind, acc, self.elapsed_time, self.classifcations[class_index]
     
 
 """
@@ -126,11 +141,11 @@ beef5_test_path = "/Users/vickyhaney/Documents/GAship/DrBruno/EKG/UCRArchive_201
 
 
 
-_, _, acc_beef1 = classifier.find_accuracy(0, beef1_test_path)
-_, _, acc_beef2 = classifier.find_accuracy(1, beef2_test_path)
-_, _, acc_beef3 = classifier.find_accuracy(2, beef3_test_path)
-_, _, acc_beef4 = classifier.find_accuracy(3, beef4_test_path)
-_, _, acc_beef5 = classifier.find_accuracy(4, beef5_test_path)
+_, _, acc_beef1, time_1, label_1 = classifier.find_accuracy(0, beef1_test_path)
+_, _, acc_beef2, time_2, label_2 = classifier.find_accuracy(1, beef2_test_path)
+_, _, acc_beef3, time_3, label_3 = classifier.find_accuracy(2, beef3_test_path)
+_, _, acc_beef4, time_4, label_4 = classifier.find_accuracy(3, beef4_test_path)
+_, _, acc_beef5, time_5, label_5 = classifier.find_accuracy(4, beef5_test_path)
 
 print(acc_beef1)
 print(acc_beef2)
