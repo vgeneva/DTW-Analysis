@@ -1,0 +1,27 @@
+Algorithm,Label,Accuracy,Time (mins)
+dtw_EKG,R,0.996,3.71
+dtw_EKG,V,0.9654,7.05
+dtw_EKG,L,0.96,3.54
+dtw_EKG,jj,0.9851,1.27
+dtw_EKG,E,0.9474,0.53
+dtw_EKG,N,0.999,5.49
+dtw_EKG,J,1.0,0.2
+dtw_EKG,A,0.984,5.49
+cdtw_EKG,R,0.998,9.99
+cdtw_EKG,V,0.9837,20.91
+cdtw_EKG,L,0.954,9.99
+cdtw_EKG,jj,0.995,4.37
+cdtw_EKG,E,0.9684,2.24
+cdtw_EKG,N,1.0,19.89
+cdtw_EKG,J,1.0,0.88
+cdtw_EKG,A,0.996,19.9
+dtw_beef,1,0.8333,0.04
+dtw_beef,2,0.3333,0.04
+dtw_beef,3,0.6667,0.03
+dtw_beef,4,0.6667,0.03
+dtw_beef,5,0.3333,0.03
+cdtw_beef,1,0.8333,0.17
+cdtw_beef,2,0.5,0.18
+cdtw_beef,3,0.6667,0.18
+cdtw_beef,4,0.8333,0.18
+cdtw_beef,5,0.5,0.17
