@@ -4,6 +4,7 @@ import pandas as pd
 import time
 from tqdm import tqdm
 
+# this is a test to add to github
 
 class DTWResults:
     def __init__(self, train_matrix_path, train_data_path):
