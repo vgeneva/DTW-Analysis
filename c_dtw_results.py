@@ -139,7 +139,7 @@ print(f"Accuracy for A: {A_acc}")
 """
 
 beef_train_data_path = "/Users/vickyhaney/Documents/GAship/DrBruno/EKG/UCRArchive_2018/Beef/Beef_TRAIN.tsv"
-pd.read_csv(beef_train_data_path)
+pd.read_csv(beef_train_data_path, sep='\t', header = None)
 path_results = f"/Users/vickyhaney/Documents/GAship/DrBruno/EKG/cdtw_UCR_data/Beef/Beef1Beef_dist_obj_4.csv"
 path_test = f"/Users/vickyhaney/Documents/GAship/DrBruno/EKG/cdtw_UCR_data/Beef/Beef1_test_matrix.csv"
 
