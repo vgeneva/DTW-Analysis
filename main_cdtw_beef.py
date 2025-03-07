@@ -54,7 +54,7 @@ print(accruracies_for_beef)
 print(time_beef)
 print(beef_label)
 
-
+ 
 def log_results(algorithm, label, accuracies, times, filename = "results_log.csv"):
     # Create a CSV file and write the results
     """
@@ -84,3 +84,5 @@ def log_results(algorithm, label, accuracies, times, filename = "results_log.csv
     return None
 
 log_results("cdtw_beef", beef_label, accruracies_for_beef, time_beef)
+
+ 
